@@ -14,4 +14,4 @@ class User(db.Model):
     password = db.Column(db.String(120), unique=True, nullable=False)
 
     def __repr__(self):
-        return f'<User {self.username} created>'
+        return f'<User {self.username}>'
