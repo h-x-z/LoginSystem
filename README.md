@@ -1,2 +1,2 @@
 # LoginSystem
-Testing a login system with Flask, JWT and SQLite
+Testing a login system with Flask, JWT, passlib and SQLite
