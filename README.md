@@ -17,6 +17,7 @@ db.create_all()
 quit()
 ```
 
+
 ## Register screen: 
 ![Register screen](https://i.imgur.com/2RST4s2.png)
 
