@@ -11,6 +11,7 @@ If you want to reset the database, delete main.db from routes directory then ope
 ```
 import db from routes.auth
 db.create_all()
+quit()
 ```
 
 ## Register screen: 
