@@ -16,11 +16,11 @@ def register():
         if user is None:
             if len(q_password) < 8:
                 return render_template('register.html', error=2, olduser=q_username)
-            new_user = auth.User(username=q_username, password=q_password)
+            hashed = auth.hashPassword(q_password)
+            new_user = auth.User(username=q_username, password=hashed)
             auth.db.session.add(new_user)
             auth.db.session.commit()
-            token = jwt.encode({'username': q_username, 'password': q_password}, auth.key, algorithm='HS256')
-            session['token'] = token
+            session['token'] = auth.generateToken(q_username)
             return redirect('/')
         if user.username == q_password:
             return render_template('register.html', error=1)

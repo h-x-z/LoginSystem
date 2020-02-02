@@ -1,6 +1,7 @@
 from flask import Flask, session
 from flask_sqlalchemy import SQLAlchemy
 import jwt
+from passlib.hash import pbkdf2_sha256
 
 key = 'oghC/Vqm+TCKtaJMrEx0JQ=='
 sesskey = 'LzbUPcyF3uRpyaNhjNA+tQ=='
@@ -26,3 +27,17 @@ def loggedin():
         if user.username == account['username'] and user.password == account['password']:
             return True
     return False
+
+def validatePassword(password, username):
+    user = User.query.filter_by(username=username).first()
+    if pbkdf2_sha256.verify(password, user.password):
+        return True
+    return False
+
+def hashPassword(password):
+    return pbkdf2_sha256.hash(password)
+
+def generateToken(username):
+    user = User.query.filter_by(username=username).first()
+    token = jwt.encode({'username': user.username, 'password': user.password}, key, algorithm='HS256')
+    return token

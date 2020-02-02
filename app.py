@@ -14,3 +14,4 @@ app.register_blueprint(logout_b)
 
 app.secret_key = auth.sesskey
 app.run(debug=True)
+

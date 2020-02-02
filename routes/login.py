@@ -14,11 +14,10 @@ def login():
         user = auth.User.query.filter_by(username=q_username).first()
         if user is None:
             return render_template('login.html', error=1, users = auth.User.query.all())
-        if user.password != q_password:
-            return render_template('login.html', error=2, olduser=q_username, users = auth.User.query.all())
-        if user.password == q_password:
-            token = jwt.encode({'username': q_username, 'password': q_password}, auth.key, algorithm='HS256')
-            session['token'] = token
+        if auth.validatePassword(q_password, q_username):
+            session['token'] = auth.generateToken(q_username)
             return redirect('/')
+        else:
+            return render_template('login.html', error=2, olduser=q_username, users=auth.User.query.all())
     else:
         return render_template('login.html', users = auth.User.query.all())
