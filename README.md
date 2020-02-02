@@ -4,6 +4,7 @@ A simple yet secure login and register system using;
 - passlib
 - PyJWT
 - SQLAlchemy
+
 Feel free to use it as a base template to speed up work on any other projects.
 
 ## Setup
